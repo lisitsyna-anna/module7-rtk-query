@@ -1,15 +1,23 @@
-import { Redirect } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
-import { useCreateTodoMutation } from 'redux/todos/todoSlice';
+import { useHistory, Redirect } from 'react-router-dom';
 import { Spinner } from 'components/Spinner/Spinner';
+import { useCreateTodoMutation } from 'redux/todos/todoSlice';
 
-export const CreateTodoPage = () => {
+const CreateTodoPage = () => {
+  //   const history = useHistory();
   const [createTodo, { isLoading, isSuccess }] = useCreateTodoMutation();
 
   const handleSubmit = async e => {
     e.preventDefault();
-    createTodo(e.currentTarget.elements.content.value);
+    const content = e.currentTarget.elements.content.value;
+    createTodo(content);
     e.currentTarget.reset();
+    // try {
+    //   await createTodo(content);
+    //   history.push('/todos');
+    // } catch (error) {
+    //   console.log(error);
+    // }
 
     toast.success('Заметка создана!');
   };
@@ -17,7 +25,7 @@ export const CreateTodoPage = () => {
   return (
     <>
       {isSuccess && <Redirect to="/todos" />}
-      <form autoComplete="off" onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit}>
         <input type="text" name="content" />
         <button type="submit" disabled={isLoading}>
           {isLoading && <Spinner size={12} />}
@@ -27,3 +35,5 @@ export const CreateTodoPage = () => {
     </>
   );
 };
+
+export default CreateTodoPage;

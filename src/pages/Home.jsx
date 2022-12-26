@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useGetPokemonByNameQuery } from 'redux/pokemon';
 import { Spinner } from 'components/Spinner/Spinner';
 
-export const HomePage = () => {
+const HomePage = () => {
   const [pokemonName, setPokemonName] = useState('');
   const { data, error, isFetching, isError } = useGetPokemonByNameQuery(
     pokemonName,
@@ -10,6 +10,10 @@ export const HomePage = () => {
       skip: pokemonName === '',
     }
   );
+
+  console.log('data', data);
+  console.log('error', error);
+  console.log('isFetching', isFetching);
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -22,20 +26,20 @@ export const HomePage = () => {
 
   return (
     <>
-      <form autoComplete="off" onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit}>
         <input type="text" name="pokemonName" />
-        <button type="submit">Search</button>
+        <button type="submit ">Search</button>
       </form>
-
-      {isFetching && <Spinner />}
 
       {showNotFoundError && (
         <p>
-          Упс, покемона с имененем <b>{pokemonName}</b> нет
+          Упс, покемона с именем <b>{pokemonName} </b> нет
         </p>
       )}
-
-      {showPokemonData && <h1>{data.name}</h1>}
+      {isFetching && <Spinner />}
+      {showPokemonData && <h2>{data.name}</h2>}
     </>
   );
 };
+
+export default HomePage;

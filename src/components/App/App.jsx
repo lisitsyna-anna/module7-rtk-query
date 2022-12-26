@@ -1,8 +1,8 @@
 import { Toaster } from 'react-hot-toast';
 import { Switch, Route } from 'react-router-dom';
-import { TodosPage } from 'pages/Todos';
-import { HomePage } from 'pages/Home';
-import { CreateTodoPage } from 'pages/CreateTodo';
+import TodosPage from 'pages/Todos';
+import HomePage from 'pages/Home';
+import CreateTodoPage from 'pages/CreateTodo';
 
 export const App = () => {
   return (

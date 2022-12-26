@@ -1,14 +1,14 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 export const todoApi = createApi({
-  reducerPath: 'todoApi',
+  reducerPath: 'todosApi ',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'https://611560228f38520017a38499.mockapi.io/api/v1/',
+    baseUrl: 'https://63a8a4f3f4962215b586468f.mockapi.io',
   }),
   tagTypes: ['Todo'],
   endpoints: builder => ({
     fetchTodos: builder.query({
-      query: () => '/todos',
+      query: () => `/todos`,
       providesTags: ['Todo'],
     }),
     deleteTodo: builder.mutation({
@@ -20,7 +20,7 @@ export const todoApi = createApi({
     }),
     createTodo: builder.mutation({
       query: todoContent => ({
-        url: '/todos',
+        url: `/todos`,
         method: 'POST',
         body: {
           content: todoContent,
